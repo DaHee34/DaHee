@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIRTHDAY PARTY OF DAHEE</title>
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --dark-bg: #000814;
+            --glass: rgba(0, 20, 40, 0.6);
+            --accent: #7000ff;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--dark-bg);
+            color: white;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Nền động chuyển màu cực nghệ */
+        .animated-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, #001a33 0%, #000814 100%);
+            z-index: -2;
+        }
+
+        /* Hiệu ứng mây neon mờ ảo phía sau */
+        .neon-glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: var(--neon-blue);
+            filter: blur(150px);
+            border-radius: 50%;
+            opacity: 0.15;
+            z-index: -1;
+            animation: moveGlow 20s infinite alternate;
+        }
+
+        @keyframes moveGlow {
+            from { transform: translate(-20%, -20%); }
+            to { transform: translate(20%, 20%); }
+        }
+
+        .grid-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            filter: blur(1px);
+            z-index: 1;
+            animation: floatUp infinite linear;
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) scale(0); opacity: 0; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+
+        .card {
+            position: relative;
+            z-index: 10;
+            background: var(--glass);
+            backdrop-filter: blur(25px);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            text-align: center;
+            width: 380px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5), 
+                        inset 0 0 20px rgba(0, 243, 255, 0.1);
+            animation: cardAppear 1s ease-out;
+        }
+
+        @keyframes cardAppear {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--neon-blue);
+            text-shadow: 0 0 15px var(--neon-blue);
+            margin-bottom: 5px;
+        }
+
+        .event-details {
+            margin: 25px 0;
+            border-top: 1px solid rgba(0, 243, 255, 0.2);
+            padding-top: 20px;
+            font-size: 0.95rem;
+            line-height: 2;
+            color: #d1d1d1;
+        }
+
+        .event-details b { color: #fff; text-shadow: 0 0 5px var(--neon-blue); }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0, 243, 255, 0.5);
+            border-radius: 12px;
+            color: white;
+            text-align: center;
+            outline: none;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+        }
+
+        .checkbox-container {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(45deg, var(--neon-blue), var(--accent));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        button:hover {
+            box-shadow: 0 0 25px var(--neon-blue);
+            transform: scale(1.02);
+        }
+
+        #loading, #success { display: none; margin-top: 15px; }
+        #success { color: #00ff88; text-shadow: 0 0 10px #00ff88; }
+    </style>
+</head>
+<body>
+
+    <div class="animated-bg"></div>
+    <div class="neon-glow"></div>
+    <div class="grid-bg"></div>
+    <div id="particles-container"></div>
+
+    <div class="card">
+        <h1>SYSTEM INVITE</h1>
+        <p style="opacity: 0.8; letter-spacing: 1px;">BIRTHDAY PARTY OF DAHEE</p>
+        
+        <div class="event-details">
+            📍 LOCATION: <b>JOOPPI PHÚ NHUẬN</b><br>
+            📅 DATE: <b>29.3.2026</b><br>
+            ⏰ TIME: <b>18:00 PM</b>
+        </div>
+
+        <div class="input-group">
+            <input type="text" id="guestName" placeholder="XÁC NHẬN DANH TÍNH (NHẬP TÊN)">
+            
+            <label class="checkbox-container">
+                <input type="checkbox" id="isAttending" checked>
+                Mình sẽ tham gia cùng với bạn
+            </label>
+
+            <button onclick="submitData()">XÁC NHẬN</button>
+        </div>
+
+        <div id="loading">ĐANG KẾT NỐI VỚI HỆ THỐNG...</div>
+        <div id="success">XÁC THỰC THÀNH CÔNG! HẸN GẶP LẠI.</div>
+    </div>
+
+    <script>
+        // Tạo các hạt sáng với kích thước ngẫu nhiên
+        const container = document.getElementById('particles-container');
+        for (let i = 0; i < 50; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            const size = Math.random() * 3 + 1 + 'px';
+            p.style.width = size;
+            p.style.height = size;
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.animationDuration = Math.random() * 12 + 8 + 's';
+            p.style.animationDelay = Math.random() * 5 + 's';
+            p.style.opacity = Math.random();
+            container.appendChild(p);
+        }
+
+        function submitData() {
+            const name = document.getElementById('guestName').value;
+            const attending = document.getElementById('isAttending').checked ? "v" : "x";
+            const loading = document.getElementById('loading');
+            const success = document.getElementById('success');
+
+            if (!name) {
+                alert("Bạn ơi, hãy nhập tên để mình chuẩn bị nhé!");
+                return;
+            }
+
+            loading.style.display = "block";
+            
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbyf0vgDeoPPouvMMjG5gewitShm1eD_oX_bfzKbwWb3U8zjsPIX-uko6EA-joqMQ6D7Dw/exec';
+            
+            const formData = new URLSearchParams();
+            formData.append('name', name);
+            formData.append('attending', attending);
+
+            fetch(scriptURL, {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors'
+            })
+            .then(() => {
+                loading.style.display = "none";
+                success.style.display = "block";
+                document.getElementById('guestName').value = "";
+            })
+            .catch(error => {
+                console.error('Error!', error.message);
+                alert("Hệ thống bận, nhưng Dahee vẫn chờ bạn nhé!");
+                loading.style.display = "none";
+            });
+        }
+    </script>
+</body>
+</html>
